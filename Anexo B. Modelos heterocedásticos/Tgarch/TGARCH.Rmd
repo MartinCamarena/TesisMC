@@ -1,0 +1,298 @@
+---
+title: "Anexo B"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Para estimar los coeficientes de TGARCH las acciones , primero se determinó el modelo ARMA ajsutado a la serie de rendimientos de cada una de ella. Para ello se efectuó lo siguiente:
+
+```{r}
+  
+  # ARMA para AMX
+  
+  
+  x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$AMX))
+library(FitARMA)
+
+out1<-FitARMA(xx, c(1,0,1))
+out1
+
+out2<-FitARMA(xx, c(1,0,2))
+out2
+
+out3<-FitARMA(xx, c(2,0,1))
+out3
+
+out4<-FitARMA(xx, c(2,0,2))
+out4
+
+a<-residuals(out1)
+fit<-a^2
+
+acfgy=acf(fit,main='ACF',lag.max=100,ylim=c(-0.5,1))
+pacfgy=pacf(fit,main='PACF',lag.max=100,ylim=c(-0.5,1))
+```
+
+
+```{r}
+  
+  # ARMA para TLEVISA
+  
+  x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$TLEVISA))
+library(FitARMA)
+
+out1<-FitARMA(xx, c(1,0,1))
+out1
+
+out2<-FitARMA(xx, c(1,0,2))
+out2
+
+out3<-FitARMA(xx, c(2,0,1))
+out3
+
+out4<-FitARMA(xx, c(2,0,2))
+out4
+
+a<-residuals(out1)
+fit<-a^2
+
+acfgy=acf(fit,main='ACF',lag.max=100,ylim=c(-0.5,1))
+pacfgy=pacf(fit,main='PACF',lag.max=100,ylim=c(-0.5,1))
+
+```
+
+```{r}
+  
+  # ARMA para GFNORTE
+  
+  x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$GFNORTE))
+library(FitARMA)
+
+out1<-FitARMA(xx, c(1,0,1))
+out1
+
+out2<-FitARMA(xx, c(1,0,2))
+out2
+
+out3<-FitARMA(xx, c(2,0,1))
+out3
+
+out4<-FitARMA(xx, c(2,0,2))
+out4
+
+a<-residuals(out3)
+fit<-a^2
+
+acfgy=acf(fit,main='ACF',lag.max=100,ylim=c(-0.5,1))
+pacfgy=pacf(fit,main='PACF',lag.max=100,ylim=c(-0.5,1))
+```
+
+
+```{r}
+  
+  # ARMA para CEMEX
+  
+  x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$CEMEX))
+library(FitARMA)
+
+out1<-FitARMA(xx, c(1,0,1))
+out1
+
+out2<-FitARMA(xx, c(1,0,2))
+out2
+
+out3<-FitARMA(xx, c(2,0,1))
+out3
+
+out4<-FitARMA(xx, c(2,0,2))
+out4
+
+a<-residuals(out1)
+fit<-a^2
+
+acfgy=acf(fit,main='ACF',lag.max=100,ylim=c(-0.5,1))
+pacfgy=pacf(fit,main='PACF',lag.max=100,ylim=c(-0.5,1))
+```
+
+```{r}
+  
+  # ARMA para BIMBO
+  
+  x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$BIMBO))
+library(FitARMA)
+
+out1<-FitARMA(xx, c(1,0,1))
+out1
+
+out2<-FitARMA(xx, c(1,0,2))
+out2
+
+out3<-FitARMA(xx, c(2,0,1))
+out3
+
+out4<-FitARMA(xx, c(2,0,2))
+out4
+
+a<-residuals(out1)
+fit<-a^2
+
+acfgy=acf(fit,main='ACF',lag.max=100,ylim=c(-0.5,1))
+pacfgy=pacf(fit,main='PACF',lag.max=100,ylim=c(-0.5,1))
+```
+
+
+Posteriormente, se llevó a cabo el análisis de las propuestas de órdenes para los modelos ARMA - TGARCH para cada acción , de donde se obtuvo:
+  
+  
+  
+```{r}
+  #TGARCH AMX
+  
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$AMX))
+fitgxx1 <- garchFit( formula = ~aparch(1,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH11 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$AMX))
+fitgxx1 <- garchFit( formula = ~aparch(1,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH12 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$AMX))
+fitgxx1 <- garchFit( formula = ~aparch(2,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH21 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$AMX))
+fitgxx1 <- garchFit( formula = ~aparch(2,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH22 del portafolio
+summary(fitgxx1)
+```
+
+```{r}
+
+#TGARCH TLEVISA
+  
+  library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$TLEVISA))
+fitgxx1 <- garchFit( formula = ~aparch(1,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH11 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$TLEVISA))
+fitgxx1 <- garchFit( formula = ~aparch(1,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH12 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$TLEVISA))
+fitgxx1 <- garchFit( formula = ~aparch(2,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH21 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$TLEVISA))
+fitgxx1 <- garchFit( formula = ~aparch(2,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH22 del portafolio
+summary(fitgxx1)
+```
+
+
+```{r}
+  #TGARCH GFNORTE
+  
+  library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$GFNORTE))
+fitgxx1 <- garchFit( formula = ~aparch(1,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH11 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$GFNORTE))
+fitgxx1 <- garchFit( formula = ~aparch(1,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH12 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$GFNORTE))
+fitgxx1 <- garchFit( formula = ~aparch(2,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH21 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$GFNORTE))
+fitgxx1 <- garchFit( formula = ~aparch(2,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH22 del portafolio
+summary(fitgxx1)
+```
+
+```{r}
+  #TGARCH CEMEX
+  
+  library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$CEMEX))
+fitgxx1 <- garchFit( formula = ~aparch(1,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH11 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$CEMEX))
+fitgxx1 <- garchFit( formula = ~aparch(1,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH12 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$CEMEX))
+fitgxx1 <- garchFit( formula = ~aparch(2,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH21 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$CEMEX))
+fitgxx1 <- garchFit( formula = ~aparch(2,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH22 del portafolio
+summary(fitgxx1)
+```
+
+
+```{r}
+  #TGARCH BIMBO
+  
+  library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$BIMBO))
+fitgxx1 <- garchFit( formula = ~aparch(1,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH11 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$BIMBO))
+fitgxx1 <- garchFit( formula = ~aparch(1,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH12 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$BIMBO))
+fitgxx1 <- garchFit( formula = ~aparch(2,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH21 del portafolio
+summary(fitgxx1)
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$BIMBO))
+fitgxx1 <- garchFit( formula = ~aparch(2,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH22 del portafolio
+summary(fitgxx1)
+
+```

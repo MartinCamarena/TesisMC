@@ -1,0 +1,76 @@
+---
+title: "Anexo E"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Para estimar los coeficientes de desviación estándar y residuales del portafolio bajo el método de SHF, se tiene que:
+
+Para el caso de ARMA-GARCH(1,2)
+
+```{r}
+  options(max.print=999999)
+
+    
+  #SHF GARCH
+  
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Var.csv',header=TRUE,sep=","); #Precios del portafolio, es necesario actualizar la ruta para que tome el archivo de Var.csv
+xx<-diff(log(x$Valor))
+fitgxx1 = garchFit(formula  =  ~  garch(1, 2), data = xx, trace = FALSE)  #Se ajusta GARCH12 del portafolio
+a<-residuals(fitgxx1)
+
+write.csv(a, "C:/Users/Martin/Downloads/RSHFGARCH.csv")
+
+b<-volatility(fitgxx1)
+
+write.csv(b, "C:/Users/Martin/Downloads/VSHFGARCH.csv")
+```
+
+Para el caso de ARMA-EGARCH(1,1)
+```{r}
+options(max.print=999999)
+
+
+#SHF EGARCH
+
+library(rugarch)
+x<-read.csv('C:/Users/Martin/Downloads/Var.csv',header=TRUE,sep=","); #Precios del portafolio, es necesario actualizar la ruta para que tome el archivo de Var.csv
+xx<-diff(log(x$Valor))
+egarchx1<-ugarchspec(variance.model = list(model = "eGARCH", garchOrder = c(1,1)),
+                     mean.model = list(armaOrder = c(0,0)))
+egarch11fitxx1<-ugarchfit(egarchx1, xx,solver = 'hybrid')
+a<-residuals(egarch11fitxx1)
+
+write.csv(a, "C:/Users/Martin/Downloads/RSHFEGARCH.csv")
+
+b<-volatility(fitgxx1)
+
+write.csv(b, "C:/Users/Martin/Downloads/VSHFEGARCH.csv")
+```
+
+
+Para el caso de ARMA-TGARCH(1,2)
+```{r}
+options(max.print=999999)
+
+
+#SHF TGARCH
+
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Var.csv',header=TRUE,sep=","); #Precios del portafolio, es necesario actualizar la ruta para que tome el archivo de Var.csv
+xx<-diff(log(x$Valor))
+fitgxx1 <- garchFit( formula = ~aparch(1,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH21 del portafolio
+
+a<-residuals(fitgxx1)
+
+write.csv(a, "C:/Users/Martin/Downloads/RSHFTGARCH.csv")
+
+b<-volatility(fitgxx1)
+
+write.csv(b, "C:/Users/Martin/Downloads/VSHFTGARCH.csv")
+
+```

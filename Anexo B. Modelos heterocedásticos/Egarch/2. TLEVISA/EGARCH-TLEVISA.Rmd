@@ -1,0 +1,57 @@
+---
+title: "Anexo B"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Para estimar los coeficientes de ARMA - EGARCH(1,1) de TLEVISA:
+
+```{r}
+library(rugarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$TLEVISA))
+egarchx1<-ugarchspec(variance.model = list(model = "eGARCH", garchOrder = c(1,1)),
+                     mean.model = list(armaOrder = c(0,0)))
+egarch11fitxx1<-ugarchfit(egarchx1, xx,solver = 'hybrid')
+egarch11fitxx1
+```
+
+Del caso ARMA - EGARCH(1, 2)
+
+```{r}
+library(rugarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$TLEVISA))
+egarchx1<-ugarchspec(variance.model = list(model = "eGARCH", garchOrder = c(1,2)),
+                     mean.model = list(armaOrder = c(0,0)))
+egarch11fitxx1<-ugarchfit(egarchx1, xx,solver = 'hybrid')
+egarch11fitxx1
+```
+
+
+Para el ARMA - EGARCH(2, 1)
+```{r}
+library(rugarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$TLEVISA))
+egarchx1<-ugarchspec(variance.model = list(model = "eGARCH", garchOrder = c(2,1)),
+                     mean.model = list(armaOrder = c(0,0)))
+egarch11fitxx1<-ugarchfit(egarchx1, xx,solver = 'hybrid')
+egarch11fitxx1
+```
+
+
+Para el ARMA - EGARCH(2, 2)
+```{r}
+library(rugarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$TLEVISA))
+egarchx1<-ugarchspec(variance.model = list(model = "eGARCH", garchOrder = c(2,2)),
+                     mean.model = list(armaOrder = c(0,0)))
+egarch11fitxx1<-ugarchfit(egarchx1, xx,solver = 'hybrid')
+egarch11fitxx1
+
+```

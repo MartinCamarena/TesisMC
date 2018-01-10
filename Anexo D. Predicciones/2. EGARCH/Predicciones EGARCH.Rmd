@@ -1,0 +1,77 @@
+---
+title: "Anexo D"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Para obtener los coeficientes a t+1 de las acciones, bajo el ajuste de modelos ARMA - EGARCH, se lleva a cabo lo siguiente:
+
+Para AMX,
+
+```{r}
+library(rugarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$AMX))
+egarchx1<-ugarchspec(variance.model = list(model = "eGARCH", garchOrder = c(2,2)),
+                     mean.model = list(armaOrder = c(0,0)))
+egarch11fitxx1<-ugarchfit(egarchx1, xx,solver = 'hybrid')
+forc = ugarchforecast(egarch11fitxx1, n.ahead=2)
+forc
+```
+
+
+Para TLEVISA,
+
+```{r}
+library(rugarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$TLEVISA))
+egarchx1<-ugarchspec(variance.model = list(model = "eGARCH", garchOrder = c(1,1)),
+                     mean.model = list(armaOrder = c(0,0)))
+egarch11fitxx1<-ugarchfit(egarchx1, xx,solver = 'hybrid')
+forc = ugarchforecast(egarch11fitxx1, n.ahead=2)
+forc
+
+```
+
+
+Para GFNORTE,
+```{r}
+library(rugarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$GFNORTE))
+egarchx1<-ugarchspec(variance.model = list(model = "eGARCH", garchOrder = c(2,1)),
+                     mean.model = list(armaOrder = c(0,0)))
+egarch11fitxx1<-ugarchfit(egarchx1, xx,solver = 'hybrid')
+forc = ugarchforecast(egarch11fitxx1, n.ahead=2)
+forc
+```
+
+Para CEMEX,
+```{r}
+library(rugarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$CEMEX))
+egarchx1<-ugarchspec(variance.model = list(model = "eGARCH", garchOrder = c(1,2)),
+                     mean.model = list(armaOrder = c(0,0)))
+egarch11fitxx1<-ugarchfit(egarchx1, xx,solver = 'hybrid')
+forc = ugarchforecast(egarch11fitxx1, n.ahead=2)
+forc
+```
+
+
+Para BIMBO,
+```{r}
+library(rugarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$BIMBO))
+egarchx1<-ugarchspec(variance.model = list(model = "eGARCH", garchOrder = c(1,1)),
+                     mean.model = list(armaOrder = c(0,0)))
+egarch11fitxx1<-ugarchfit(egarchx1, xx,solver = 'hybrid')
+forc = ugarchforecast(egarch11fitxx1, n.ahead=2)
+forc
+```

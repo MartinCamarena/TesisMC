@@ -1,0 +1,60 @@
+---
+title: "Anexo D"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Para obtener los coeficientes a t+1 de las acciones, bajo el ajuste de modelos ARMA - GARCH, se lleva a cabo lo siguiente:
+
+Para AMX,
+
+```{r}
+  library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$AMX))
+fitgxx1 = garchFit(formula  =  ~  garch(1, 1), data = xx, trace = FALSE)  #Se ajusta GARCH11 del portafolio
+predict(fitgxx1)
+```
+
+
+Para TLEVISA,
+
+```{r}
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$TLEVISA))
+fitgxx1 = garchFit(formula  =  ~  garch(1, 1), data = xx, trace = FALSE)  #Se ajusta GARCH11 del portafolio
+predict(fitgxx1)
+```
+
+
+Para GFNORTE,
+```{r}
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$GFNORTE))
+fitgxx1 = garchFit(formula  =  ~  garch(1, 2), data = xx, trace = FALSE)  #Se ajusta GARCH12 del portafolio
+predict(fitgxx1)
+```
+
+Para CEMEX,
+```{r}
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$CEMEX))
+fitgxx1 = garchFit(formula  =  ~  garch(1, 2), data = xx, trace = FALSE)  #Se ajusta GARCH12 del portafolio
+predict(fitgxx1)
+```
+
+
+Para BIMBO,
+```{r}
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$BIMBO))
+fitgxx1 = garchFit(formula  =  ~  garch(1, 2), data = xx, trace = FALSE)  #Se ajusta GARCH12 del portafolio
+predict(fitgxx1)
+```

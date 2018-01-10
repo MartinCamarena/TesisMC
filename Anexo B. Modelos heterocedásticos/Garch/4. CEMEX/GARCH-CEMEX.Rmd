@@ -1,0 +1,50 @@
+---
+title: "Anexo B"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Para estimar los coeficientes de ARMA - GARCH de la acción CEMEX:
+
+Del caso ARMA-GARCH(1,1)
+
+```{r}
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$CEMEX))
+fitgxx1 = garchFit(formula  =  ~  garch(1, 1), data = xx, trace = FALSE)  #Se ajusta GARCH11 del portafolio
+summary(fitgxx1)
+```
+
+Para el ARMA-GARCH(1,2)
+
+```{r}
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$CEMEX))
+fitgxx1 = garchFit(formula  =  ~  garch(1, 2), data = xx, trace = FALSE)  #Se ajusta GARCH12 del portafolio
+summary(fitgxx1)
+```
+
+Para el ARMA-GARCH(2,1)
+
+```{r}
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$CEMEX))
+fitgxx1 = garchFit(formula  =  ~  garch(2, 1), data = xx, trace = FALSE)  #Se ajusta GARCH21 del portafolio
+summary(fitgxx1)
+```
+
+Para el  ARMA-GARCH(2,2)
+
+```{r}
+library(fGarch)
+x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
+xx<-diff(log(x$CEMEX))
+fitgxx1 = garchFit(formula  =  ~  garch(2, 2), data = xx, trace = FALSE)  #Se ajusta GARCH22 del portafolio
+summary(fitgxx1)
+```
