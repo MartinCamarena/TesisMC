@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Para estimar los coeficientes de desviación estándar y residuales del portafolio bajo el método de SHF, se tiene que:
 
-Para el caso de ARMA-GARCH(1,2)
+Para el caso de ARMA-GARCH(1,1)
 
 ```{r}
   options(max.print=999999)
@@ -20,7 +20,7 @@ Para el caso de ARMA-GARCH(1,2)
 library(fGarch)
 x<-read.csv('C:/Users/Martin/Downloads/Var.csv',header=TRUE,sep=","); #Precios del portafolio, es necesario actualizar la ruta para que tome el archivo de Var.csv
 xx<-diff(log(x$Valor))
-fitgxx1 = garchFit(formula  =  ~  garch(1, 2), data = xx, trace = FALSE)  #Se ajusta GARCH12 del portafolio
+fitgxx1 = garchFit(formula  =  ~  garch(1, 1), data = xx, trace = FALSE)  #Se ajusta GARCH11 del portafolio
 a<-residuals(fitgxx1)
 
 write.csv(a, "C:/Users/Martin/Downloads/RSHFGARCH.csv")

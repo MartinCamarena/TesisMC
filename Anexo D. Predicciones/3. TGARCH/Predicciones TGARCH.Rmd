@@ -15,7 +15,7 @@ Para AMX,
 library(fGarch)
 x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
 xx<-diff(log(x$AMX))
-fitgxx1 <- garchFit( formula = ~aparch(2,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH21 del portafolio
+fitgxx1 <- garchFit( formula = ~aparch(1,1), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH11 del portafolio
 predict(fitgxx1)
 ```
 
@@ -37,7 +37,7 @@ Para GFNORTE,
 library(fGarch)
 x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
 xx<-diff(log(x$GFNORTE))
-fitgxx1 <- garchFit( formula = ~aparch(1,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH12 del portafolio
+fitgxx1 <- garchFit( formula = ~aparch(2,2), xx, delta = 1, include.delta = FALSE)  #Se ajusta TGARCH22 del portafolio
 predict(fitgxx1)
 ```
 

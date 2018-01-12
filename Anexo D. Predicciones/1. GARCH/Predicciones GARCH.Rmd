@@ -26,7 +26,7 @@ Para TLEVISA,
 library(fGarch)
 x<-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=",");
 xx<-diff(log(x$TLEVISA))
-fitgxx1 = garchFit(formula  =  ~  garch(1, 1), data = xx, trace = FALSE)  #Se ajusta GARCH11 del portafolio
+fitgxx1 = garchFit(formula  =  ~  garch(1, 2), data = xx, trace = FALSE)  #Se ajusta GARCH12 del portafolio
 predict(fitgxx1)
 ```
 

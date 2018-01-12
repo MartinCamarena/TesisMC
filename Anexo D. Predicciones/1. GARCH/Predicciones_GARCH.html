@@ -157,19 +157,19 @@ predict(fitgxx1)</code></pre>
 <pre class="r"><code>library(fGarch)
 x&lt;-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=&quot;,&quot;);
 xx&lt;-diff(log(x$TLEVISA))
-fitgxx1 = garchFit(formula  =  ~  garch(1, 1), data = xx, trace = FALSE)  #Se ajusta GARCH11 del portafolio
+fitgxx1 = garchFit(formula  =  ~  garch(1, 2), data = xx, trace = FALSE)  #Se ajusta GARCH12 del portafolio
 predict(fitgxx1)</code></pre>
 <pre><code>##    meanForecast  meanError standardDeviation
-## 1  0.0003350486 0.01387069        0.01387069
-## 2  0.0003350486 0.01392922        0.01392922
-## 3  0.0003350486 0.01397308        0.01397308
-## 4  0.0003350486 0.01400598        0.01400598
-## 5  0.0003350486 0.01403068        0.01403068
-## 6  0.0003350486 0.01404923        0.01404923
-## 7  0.0003350486 0.01406316        0.01406316
-## 8  0.0003350486 0.01407364        0.01407364
-## 9  0.0003350486 0.01408151        0.01408151
-## 10 0.0003350486 0.01408743        0.01408743</code></pre>
+## 1  0.0003450707 0.01348474        0.01348474
+## 2  0.0003450707 0.01374078        0.01374078
+## 3  0.0003450707 0.01351568        0.01351568
+## 4  0.0003450707 0.01373527        0.01373527
+## 5  0.0003450707 0.01354354        0.01354354
+## 6  0.0003450707 0.01373195        0.01373195
+## 7  0.0003450707 0.01356872        0.01356872
+## 8  0.0003450707 0.01373048        0.01373048
+## 9  0.0003450707 0.01359160        0.01359160
+## 10 0.0003450707 0.01373056        0.01373056</code></pre>
 <p>Para GFNORTE,</p>
 <pre class="r"><code>library(fGarch)
 x&lt;-read.csv('C:/Users/Martin/Downloads/Datos.csv',header=TRUE,sep=&quot;,&quot;);

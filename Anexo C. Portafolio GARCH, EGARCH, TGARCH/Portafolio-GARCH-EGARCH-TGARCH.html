@@ -123,7 +123,7 @@ $(document).ready(function () {
 
 
 <p>Para estimar los coeficientes de AIC y BIC del portafolio bajo los modelos heterocedásticos propuestos se lleva a cabo lo siguiente:</p>
-<p>Para el ARMA - GARCH(1,2)</p>
+<p>Para el ARMA - GARCH(1,1)</p>
 <pre class="r"><code>  library(fGarch)</code></pre>
 <pre><code>## Warning: package 'fGarch' was built under R version 3.4.3</code></pre>
 <pre><code>## Loading required package: timeDate</code></pre>
@@ -140,63 +140,62 @@ $(document).ready(function () {
 <pre><code>## https://www.rmetrics.org --- Mail to: info@rmetrics.org</code></pre>
 <pre class="r"><code>x&lt;-read.csv('C:/Users/Martin/Downloads/Var.csv',header=TRUE,sep=&quot;,&quot;); #Precios del portafolio, es necesario actualizar la ruta para que tome el archivo de Var.csv
 xx&lt;-diff(log(x$Valor))
-fitgxx1 = garchFit(formula  =  ~  garch(1, 2), data = xx, trace = FALSE)  #Se ajusta GARCH12 del portafolio
+fitgxx1 = garchFit(formula  =  ~  garch(1, 1), data = xx, trace = FALSE)  #Se ajusta GARCH11 del portafolio
 summary(fitgxx1)</code></pre>
 <pre><code>## 
 ## Title:
 ##  GARCH Modelling 
 ## 
 ## Call:
-##  garchFit(formula = ~garch(1, 2), data = xx, trace = FALSE) 
+##  garchFit(formula = ~garch(1, 1), data = xx, trace = FALSE) 
 ## 
 ## Mean and Variance Equation:
-##  data ~ garch(1, 2)
-## &lt;environment: 0x075a4180&gt;
+##  data ~ garch(1, 1)
+## &lt;environment: 0x07b24e70&gt;
 ##  [data = xx]
 ## 
 ## Conditional Distribution:
 ##  norm 
 ## 
 ## Coefficient(s):
-##         mu       omega      alpha1       beta1       beta2  
-## 4.9856e-04  4.7186e-06  6.7095e-02  7.8196e-01  1.1249e-01  
+##         mu       omega      alpha1       beta1  
+## 4.9753e-04  4.3524e-06  6.1198e-02  9.0338e-01  
 ## 
 ## Std. Errors:
 ##  based on Hessian 
 ## 
 ## Error Analysis:
-##         Estimate  Std. Error  t value Pr(&gt;|t|)  
-## mu     4.986e-04   2.892e-04    1.724   0.0847 .
-## omega  4.719e-06   2.630e-06    1.794   0.0728 .
-## alpha1 6.710e-02   3.041e-02    2.206   0.0274 *
-## beta1  7.820e-01   5.535e-01    1.413   0.1577  
-## beta2  1.125e-01   5.141e-01    0.219   0.8268  
+##         Estimate  Std. Error  t value Pr(&gt;|t|)    
+## mu     4.975e-04   2.890e-04    1.722   0.0852 .  
+## omega  4.352e-06   1.915e-06    2.272   0.0231 *  
+## alpha1 6.120e-02   1.545e-02    3.962 7.44e-05 ***
+## beta1  9.034e-01   2.695e-02   33.524  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
 ## Log Likelihood:
-##  3892.921    normalized:  3.114337 
+##  3892.818    normalized:  3.114255 
 ## 
 ## Description:
-##  Tue Jan 02 16:45:28 2018 by user: Martin 
+##  Thu Jan 11 19:09:21 2018 by user: Martin 
 ## 
 ## 
 ## Standardised Residuals Tests:
 ##                                 Statistic p-Value     
-##  Jarque-Bera Test   R    Chi^2  52.82845  3.37641e-12 
-##  Shapiro-Wilk Test  R    W      0.9917117 1.735947e-06
-##  Ljung-Box Test     R    Q(10)  18.22362  0.05130664  
-##  Ljung-Box Test     R    Q(15)  19.57289  0.1889363   
-##  Ljung-Box Test     R    Q(20)  22.92159  0.2926612   
-##  Ljung-Box Test     R^2  Q(10)  4.6459    0.9135437   
-##  Ljung-Box Test     R^2  Q(15)  8.827123  0.8863817   
-##  Ljung-Box Test     R^2  Q(20)  13.94734  0.8331557   
-##  LM Arch Test       R    TR^2   4.602876  0.9699469   
+##  Jarque-Bera Test   R    Chi^2  53.83397  2.042255e-12
+##  Shapiro-Wilk Test  R    W      0.9916628 1.616702e-06
+##  Ljung-Box Test     R    Q(10)  18.23322  0.05115466  
+##  Ljung-Box Test     R    Q(15)  19.57673  0.188778    
+##  Ljung-Box Test     R    Q(20)  22.88593  0.2944304   
+##  Ljung-Box Test     R^2  Q(10)  4.793212  0.9045565   
+##  Ljung-Box Test     R^2  Q(15)  8.962902  0.8794492   
+##  Ljung-Box Test     R^2  Q(20)  14.03072  0.8289348   
+##  LM Arch Test       R    TR^2   4.681145  0.9677903   
 ## 
 ## Information Criterion Statistics:
 ##       AIC       BIC       SIC      HQIC 
-## -6.220674 -6.200150 -6.220706 -6.212959</code></pre>
-<p>Para el ARMA - EGARCH(1,2)</p>
+## -6.222109 -6.205690 -6.222130 -6.215937</code></pre>
+<p>Para el ARMA - EGARCH(1,1)</p>
 <pre class="r"><code>library(rugarch)</code></pre>
 <pre><code>## Warning: package 'rugarch' was built under R version 3.4.3</code></pre>
 <pre><code>## Loading required package: parallel</code></pre>
@@ -305,7 +304,7 @@ egarch11fitxx1</code></pre>
 ## 4    50     57.44      0.19092
 ## 
 ## 
-## Elapsed time : 1.664</code></pre>
+## Elapsed time : 1.842</code></pre>
 <p>Para el ARMA - TGARCH(1,2)</p>
 <pre class="r"><code>library(fGarch)
 x&lt;-read.csv('C:/Users/Martin/Downloads/Var.csv',header=TRUE,sep=&quot;,&quot;); #Precios del portafolio, es necesario actualizar la ruta para que tome el archivo de Var.csv
@@ -409,13 +408,13 @@ fitgxx1 &lt;- garchFit( formula = ~aparch(1,2), xx, delta = 1, include.delta = F
 ## beta1    -542349.920   -542669.507
 ## beta2    -542669.507   -543012.570
 ## attr(,&quot;time&quot;)
-## Time difference of 0.08100009 secs
+## Time difference of 0.07599998 secs
 ## 
 ## --- END OF TRACE ---
 ## 
 ## 
 ## Time to Estimate Parameters:
-##  Time difference of 0.642 secs</code></pre>
+##  Time difference of 0.6069999 secs</code></pre>
 <pre class="r"><code>summary(fitgxx1)</code></pre>
 <pre><code>## 
 ## Title:
@@ -426,7 +425,7 @@ fitgxx1 &lt;- garchFit( formula = ~aparch(1,2), xx, delta = 1, include.delta = F
 ## 
 ## Mean and Variance Equation:
 ##  data ~ aparch(1, 2)
-## &lt;environment: 0x149a2468&gt;
+## &lt;environment: 0x14444f8c&gt;
 ##  [data = xx]
 ## 
 ## Conditional Distribution:
@@ -454,7 +453,7 @@ fitgxx1 &lt;- garchFit( formula = ~aparch(1,2), xx, delta = 1, include.delta = F
 ##  3624.827    normalized:  2.899861 
 ## 
 ## Description:
-##  Tue Jan 02 16:45:34 2018 by user: Martin 
+##  Thu Jan 11 19:09:31 2018 by user: Martin 
 ## 
 ## 
 ## Standardised Residuals Tests:

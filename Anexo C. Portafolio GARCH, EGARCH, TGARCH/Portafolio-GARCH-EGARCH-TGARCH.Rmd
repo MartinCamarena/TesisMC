@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Para estimar los coeficientes de AIC y BIC del portafolio bajo los modelos heteroced√°sticos propuestos se lleva a cabo lo siguiente:
+Para estimar los coeficientes de AIC y BIC del portafolio bajo los modelos heteroced·sticos propuestos se lleva a cabo lo siguiente:
 
 
 Para el ARMA - GARCH(1,1)

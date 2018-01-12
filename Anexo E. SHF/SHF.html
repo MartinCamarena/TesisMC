@@ -123,7 +123,7 @@ $(document).ready(function () {
 
 
 <p>Para estimar los coeficientes de desviación estándar y residuales del portafolio bajo el método de SHF, se tiene que:</p>
-<p>Para el caso de ARMA-GARCH(1,2)</p>
+<p>Para el caso de ARMA-GARCH(1,1)</p>
 <pre class="r"><code>  options(max.print=999999)
 
     
@@ -145,7 +145,7 @@ library(fGarch)</code></pre>
 <pre><code>## https://www.rmetrics.org --- Mail to: info@rmetrics.org</code></pre>
 <pre class="r"><code>x&lt;-read.csv('C:/Users/Martin/Downloads/Var.csv',header=TRUE,sep=&quot;,&quot;); #Precios del portafolio, es necesario actualizar la ruta para que tome el archivo de Var.csv
 xx&lt;-diff(log(x$Valor))
-fitgxx1 = garchFit(formula  =  ~  garch(1, 2), data = xx, trace = FALSE)  #Se ajusta GARCH12 del portafolio
+fitgxx1 = garchFit(formula  =  ~  garch(1, 1), data = xx, trace = FALSE)  #Se ajusta GARCH11 del portafolio
 a&lt;-residuals(fitgxx1)
 
 write.csv(a, &quot;C:/Users/Martin/Downloads/RSHFGARCH.csv&quot;)
@@ -293,7 +293,7 @@ fitgxx1 &lt;- garchFit( formula = ~aparch(1,2), xx, delta = 1, include.delta = F
 ## 
 ## 
 ## Time to Estimate Parameters:
-##  Time difference of 0.6200001 secs</code></pre>
+##  Time difference of 0.6140001 secs</code></pre>
 <pre class="r"><code>a&lt;-residuals(fitgxx1)
 
 write.csv(a, &quot;C:/Users/Martin/Downloads/RSHFTGARCH.csv&quot;)
